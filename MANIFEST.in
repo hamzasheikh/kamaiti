@@ -1,0 +1,7 @@
+include LICENSE
+include README.md
+recursive-include docs *
+recursive-include etc *
+recursive-include templates *
+recursive-include utils *
+recursive-include var *

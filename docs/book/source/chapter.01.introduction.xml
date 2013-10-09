@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="discover_kamaiti" xmlns="http://docbook.org/ns/docbook" version="5.0">
+    <title>Discover Kamaiti</title>
+    <section xml:id="introduction_kamaiti">
+        <title>What is a Kamaiti?</title>
+        <para>Kamaiti is a system generally used in South Asia where a group of trusted family and friends pool their money every month and give it to one person in the group. The recipient then uses it to deal with important, sometimes large, expenses.</para>
+        <para>Take a simple example. A group of twelve friends get together and each participant agrees to put $100 each month in the pool for a year. Every month one of the participant receives the total pool for the month, i.e. $1200. During the year, each participant receives the pool exactly once. At the end of the year, each participant has contributed $1200 to the pool and also received $1200.</para>
+        <para>In essense, Kamaiti is a saving scheme where you get to spend money when you need it. You may also think of it as an interest-free loan given to one participant every month by all participants of the Kamaiti.</para>
+        <para>The size of the group is usually small and trusted family and friends participate. It gives a chance for people to help someone out each month so they may meet large or unexpected expenses.</para>
+        <para>The size of the group, individual contribution, pool size, etc. are tweaked according to the needs of the participants. Some Kamaitis last a year but others may be shorter or longer.</para>
+        <para>In certain parts this is known as BC or VC.</para>
+        <para>There's usually one trusted person designated as the manager of the Kamaiti. All participants give their share of the pool to this manager, who then disperses the pool to the intended recipient.</para>
+        <para>This project is an attempt to modernize the management of a Kamaiti. The main goal is to create a simple system used by the manager to keep track of members, pool, monthly participation, etc. Communication between participants might also be made easier through this project.</para>
+    </section>
+</chapter>

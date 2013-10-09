@@ -1,0 +1,783 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Kamaiti Documentation
+</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+ <meta name="generator" content="DocBook XSL-NS Stylesheets V1.75.2"/>
+</head>
+<body>
+<div class="book" title="Kamaiti Documentation">
+<div class="titlepage">
+<div>
+<div>
+<h1 class="title">
+<a id="kamaiti_doc"/>Kamaiti Documentation
+</h1>
+</div>
+<div>
+<div class="author">
+<h3 class="author">
+<span class="firstname">Hamza
+</span> 
+<span class="surname">Sheikh
+</span>
+</h3>
+</div>
+</div>
+<div>
+<p class="releaseinfo">This book covers version 0.0.1 of Kamaiti
+</p>
+</div>
+<div>
+<p class="copyright">Copyright © 2013 Hamza Sheikh
+</p>
+</div>
+<div>
+<div class="legalnotice" title="Legal Notice">
+<a id="idp24795936"/>
+<p>Redistribution and use in source (SGML DocBook) and 'compiled' forms (SGML, HTML, PDF, PostScript, RTF and so forth) with or without modification, are permitted provided that the following conditions are met:
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>Redistributions of source code (SGML DocBook) must retain the above copyright notice, this list of conditions and the following disclaimer as the first lines of this file unmodified.
+</p>
+</li>
+<li class="listitem">
+<p>Redistributions in compiled form (transformed to other DTDs, converted to PDF, PostScript, RTF and other formats) must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+</p>
+</li>
+</ul>
+</div>
+<p>THIS DOCUMENTATION IS PROVIDED BY THE AUTHOR OR AUTHORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR OR AUTHORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS DOCUMENTATION, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</p>
+</div>
+</div>
+</div>
+<hr/>
+</div>
+<div class="toc">
+<p>
+<b>Table of Contents
+</b>
+</p>
+<dl>
+<dt>
+<span class="chapter">
+<a href="#discover_kamaiti">1. Discover Kamaiti
+</a>
+</span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section">
+<a href="#introduction_kamaiti">What is a Kamaiti?
+</a>
+</span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="chapter">
+<a href="#installation">2. Install Kamaiti Development Environment
+</a>
+</span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section">
+<a href="#installdev_localpython">Install Local Python
+</a>
+</span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section">
+<a href="#installdev_localpython_devtools">Install Development Tools
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_localpython_downloadsource">Download Python Source Code
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_localpython_compileinstall">Compile and Install Python
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_localpython_modifypath">Modify $PATH
+</a>
+</span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="section">
+<a href="#installdev_virtenv">Create Virtual Environment
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_install_git">Install git
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_install_pgsql">Install PostgreSQL
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_configure_pgsql">Configure PostgreSQL
+</a>
+</span>
+</dt>
+</dl>
+</dd>
+</dl>
+</div>
+<div class="chapter" title="Chapter 1. Discover Kamaiti">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="discover_kamaiti"/>Chapter 1. Discover Kamaiti
+</h2>
+</div>
+</div>
+</div>
+<div class="toc">
+<p>
+<b>Table of Contents
+</b>
+</p>
+<dl>
+<dt>
+<span class="section">
+<a href="#introduction_kamaiti">What is a Kamaiti?
+</a>
+</span>
+</dt>
+</dl>
+</div>
+<div class="section" title="What is a Kamaiti?">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="introduction_kamaiti"/>What is a Kamaiti?
+</h2>
+</div>
+</div>
+</div>
+<p>Kamaiti is a system generally used in South Asia where a group of trusted family and friends pool their money every month and give it to one person in the group. The recipient then uses it to deal with important, sometimes large, expenses.
+</p>
+<p>Take a simple example. A group of twelve friends get together and each participant agrees to put $100 each month in the pool for a year. Every month one of the participant receives the total pool for the month, i.e. $1200. During the year, each participant receives the pool exactly once. At the end of the year, each participant has contributed $1200 to the pool and also received $1200.
+</p>
+<p>In essense, Kamaiti is a saving scheme where you get to spend money when you need it. You may also think of it as an interest-free loan given to one participant every month by all participants of the Kamaiti.
+</p>
+<p>The size of the group is usually small and trusted family and friends participate. It gives a chance for people to help someone out each month so they may meet large or unexpected expenses.
+</p>
+<p>The size of the group, individual contribution, pool size, etc. are tweaked according to the needs of the participants. Some Kamaitis last a year but others may be shorter or longer.
+</p>
+<p>In certain parts this is known as BC or VC.
+</p>
+<p>There's usually one trusted person designated as the manager of the Kamaiti. All participants give their share of the pool to this manager, who then disperses the pool to the intended recipient.
+</p>
+<p>This project is an attempt to modernize the management of a Kamaiti. The main goal is to create a simple system used by the manager to keep track of members, pool, monthly participation, etc. Communication between participants might also be made easier through this project.
+</p>
+</div>
+</div>
+<div class="chapter" title="Chapter 2. Install Kamaiti Development Environment">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="installation"/>Chapter 2. Install Kamaiti Development Environment
+</h2>
+</div>
+</div>
+</div>
+<div class="toc">
+<p>
+<b>Table of Contents
+</b>
+</p>
+<dl>
+<dt>
+<span class="section">
+<a href="#installdev_localpython">Install Local Python
+</a>
+</span>
+</dt>
+<dd>
+<dl>
+<dt>
+<span class="section">
+<a href="#installdev_localpython_devtools">Install Development Tools
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_localpython_downloadsource">Download Python Source Code
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_localpython_compileinstall">Compile and Install Python
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_localpython_modifypath">Modify $PATH
+</a>
+</span>
+</dt>
+</dl>
+</dd>
+<dt>
+<span class="section">
+<a href="#installdev_virtenv">Create Virtual Environment
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_install_git">Install git
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_install_pgsql">Install PostgreSQL
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_configure_pgsql">Configure PostgreSQL
+</a>
+</span>
+</dt>
+</dl>
+</div>
+<p>These instructions have been created and tested using a CentOS 6.4 server. The general idea for the installation remains the same for other Linux distributions; package name and/or package managers may change.
+</p>
+<p>The section for configuring Apache is very much related to CentOS. Other distributions generally don't follow the same process. If you're installing Kamaiti on another distribution, make sure you follow its procedures for configuring Apache.
+</p>
+<p>It's assumed that you are fairly experienced in installing and configuring packages and know your way around a Linux distribution.
+</p>
+<div class="section" title="Install Local Python">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="installdev_localpython"/>Install Local Python
+</h2>
+</div>
+</div>
+</div>
+<p>You will need to install local Python. The reason is that Kamaiti is built using Python 3.3 and it's not available on CentOS 6.4. There are four major steps in installing your own Python.
+</p>
+<div class="itemizedlist">
+<ul class="itemizedlist">
+<li class="listitem">
+<p>Install Development Tools
+</p>
+</li>
+<li class="listitem">
+<p>Download Python Source Code
+</p>
+</li>
+<li class="listitem">
+<p>Compile and Install Python
+</p>
+</li>
+<li class="listitem">
+<p>Modify $PATH
+</p>
+</li>
+</ul>
+</div>
+<div class="section" title="Install Development Tools">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a id="installdev_localpython_devtools"/>Install Development Tools
+</h3>
+</div>
+</div>
+</div>
+<p>You will need some tools to compile Python. The easiest way to obtain them in CentOS is to install the ‘Development Tools’ group.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">su -
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">yum groupinstall "Development Tools"
+</code>
+</p>
+<p>You also need some libraries that Python uses to provide “batteries included” support.
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel
+</code>
+</p>
+</div>
+<div class="section" title="Download Python Source Code">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a id="installdev_localpython_downloadsource"/>Download Python Source Code
+</h3>
+</div>
+</div>
+</div>
+<p>Head over to Python.org and download version 3.3.2, used in this version of Kamaiti.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">mkdir ~/localpython
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">cd ~/localpython
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localpython$ 
+</code>
+<code class="code">curl -O http://python.org/ftp/python/3.3.2/Python-3.3.2.tar.bz2
+</code>
+</p>
+<p>Now just un-tar the file so you can use its contents.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localpython$ 
+</code>
+<code class="code">tar xvf Python-3.3.2.tar.bz2
+</code>
+</p>
+<p>You should see these two items in the localpython directory:
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localpython$ 
+</code>
+<code class="code">ls
+</code>
+</p>
+<p>Python-3.3.2  Python-3.3.2.tar.bz2
+</p>
+</div>
+<div class="section" title="Compile and Install Python">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a id="installdev_localpython_compileinstall"/>Compile and Install Python
+</h3>
+</div>
+</div>
+</div>
+<p>You now have Python source and tools to compile it. Change directory to the un-tar’ed source code.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localpython$ 
+</code>
+<code class="code">cd Python-3.3.2
+</code>
+</p>
+<p>Run configure.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localpython/Python-3.3.2$ 
+</code>
+<code class="code">./configure
+</code>
+</p>
+<p>Create a directory where you will install your local Python.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localpython/Python-3.3.2$ 
+</code>
+<code class="code">mkdir -p ~/usr/local
+</code>
+</p>
+<p>Compile and install Python to the directory you just created.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localpython/Python-3.3.2$ 
+</code>
+<code class="code">make altinstall prefix=$HOME/usr/local exec-prefix=$HOME/usr/local
+</code>
+</p>
+</div>
+<div class="section" title="Modify $PATH">
+<div class="titlepage">
+<div>
+<div>
+<h3 class="title">
+<a id="installdev_localpython_modifypath"/>Modify $PATH
+</h3>
+</div>
+</div>
+</div>
+<p>You now want to add ~/usr/local/bin to your $PATH so you don’t have to enter the full path to the Python binary every time you want to use it. Change directory to where local Python binary is located.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localpython/Python-3.3.2$ 
+</code>
+<code class="code">cd ~/usr/local/bin
+</code>
+</p>
+<p>Create an alias so you can refer to it as python3. This is optional but I like to do it because I can then use python to refer to the Python that came with CentOS and python3 to refer to my locally installed Python3.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/usr/local/bin$ 
+</code>
+<code class="code">ln -s python3.3 python3
+</code>
+</p>
+<p>Now add this path to your $PATH environment variable. Notice that we add the new path before existing $PATH. This is so that our local Python is always used before any other.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/usr/local/bin$ 
+</code>
+<code class="code">echo "export PATH=\$HOME/usr/local/bin:\$PATH" &gt;&gt; ~/.bashrc
+</code>
+</p>
+<p>Activate the new, modifed $PATH.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/usr/local/bin$ 
+</code>
+<code class="code">source ~/.bashrc
+</code>
+</p>
+<p>Another thing to consider is virtual environments, virtualenv or venv (in Python 3). Since Python3 comes with its built-in venv, just create an alias for its binary as well.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/usr/local/bin$ 
+</code>
+<code class="code">ln -s pyvenv-3.3 pyvenv
+</code>
+</p>
+<p>There’s one more modification you need to make to get pyvenv to work. Open the file and change the path to your locally installed Python.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/usr/local/bin$ 
+</code>
+<code class="code">vim pyvenv-3.3
+</code>
+</p>
+<p>Original line is:
+</p>
+<p>#!/usr/local/bin/python3.3
+</p>
+<p>After changing it should look something like:
+</p>
+<p>#!/home/kmtuser/usr/local/bin/python3.3
+</p>
+<p>You can now use this local pyvenv to create your virtualenvs.
+</p>
+</div>
+</div>
+<div class="section" title="Create Virtual Environment">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="installdev_virtenv"/>Create Virtual Environment
+</h2>
+</div>
+</div>
+</div>
+<p>Python 3 comes with its own virtualenv built in, and it’s called venv. Run the following command to create your virtualenv.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/usr/local/bin$ 
+</code>
+<code class="code">pyvenv ~/kmtvenv
+</code>
+</p>
+<p>f you do an ls you’ll notice that the python you used to create this virtualenv is copied into your virtualenv. Thus your virtualenv will continue to use its local copy. You now need to “activate” this virtualenv.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/usr/local/bin$ 
+</code>
+<code class="code">source ~/kmtvenv/bin/activate
+</code>
+</p>
+<p>Sidebar: At some point you’ll want to “deactivate” your virtualenv. To do this just run the deactivate command.
+</p>
+<p>Next step is to install setuptools. At one point Distribute was set to replace/supersede setuptools but that’s not the case anymore. Don’t worry, we’ll still use pip but to first get pip we need setuptools.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/usr/local/bin$ 
+</code>
+<code class="code">cd ~/kmtvenv
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/kmtvenv$ 
+</code>
+<code class="code">mkdir pypioffline
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/kmtvenv$ 
+</code>
+<code class="code">cd pypioffline
+</code>
+</p>
+<p>The latest version of setup tools at the time of writing was 1.1.6 so we’ll download it to the temporary/optional directory pypioffline.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/kmtvenv/pypioffline$ 
+</code>
+<code class="code">curl -O https://pypi.python.org/packages/source/s/setuptools/setuptools-1.1.6.tar.gz
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/kmtvenv/pypioffline$ 
+</code>
+<code class="code">tar xvzf setuptools-1.1.6.tar.gz
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/kmtvenv/pypioffline$ 
+</code>
+<code class="code">cd setuptools-1.1.6
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/kmtvenv/pypioffline/setuptools-1.1.6$ 
+</code>
+<code class="code">python ez_setup.py
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/kmtvenv/pypioffline/setuptools-1.1.6$ 
+</code>
+<code class="code">easy_install pip
+</code>
+</p>
+<p>You can installed pip and can now start using it to install all the other things.
+</p>
+<p/>
+<p/>
+</div>
+<div class="section" title="Install git">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="installdev_install_git"/>Install git
+</h2>
+</div>
+</div>
+</div>
+<p>You will need to install git to download the latest source code for Kamaiti from GitHub.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">su -
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">yum install git
+</code>
+</p>
+<p>The git version is older in the CentOS repositories. I recommend installing the latest git release locally, similar to what we did with Python 3.3.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">mkdir ~/localgit
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">git clone https://github.com/git/git ~/localgit
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">su -
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">yum install libcurl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">logout
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">cd ~/localgit
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localgit$ 
+</code>
+<code class="code">cd git
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localgit/git$ 
+</code>
+<code class="code">make prefix=~/usr/local all
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localgit/git$ 
+</code>
+<code class="code">make prefix=~/usr/local install
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localgit/git$ 
+</code>
+<code class="code">ls /usr/local/bin
+</code>
+</p>
+<p>
+<code class="prompt">kmtuser@server:~/localgit/git$ 
+</code>
+<code class="code">source ~/.bashrc
+</code>
+</p>
+<p>You should now be able to use the latest git you just installed locally.
+</p>
+</div>
+<div class="section" title="Install PostgreSQL">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="installdev_install_pgsql"/>Install PostgreSQL
+</h2>
+</div>
+</div>
+</div>
+<p>You will need to install PostgreSQL. You could technically use MySQL instead since there's no PGSQL specific things used in Kamaiti. But the code was developed and tested using PGSQL so it's recommended.
+</p>
+<p>One reason for using CentOS as development machine is the level of support you get from various projects. PostgreSQL is no exception. They provide their own repositories which make it easy to install the latest version of PostgreSQL.
+</p>
+<p>First you need to configure your CentOS repository to not install the PostgreSQL that comes with CentOS. Edit the file /etc/yum.repos.d/CentOS-Base.repo.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">su -
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">vim /etc/yum.repos.d/CentOS-Base.repo
+</code>
+</p>
+<p>Under both sections [base] and [updates], append the following line and save the file.
+</p>
+<p>exclude=postgresql*
+</p>
+<p>Next, you want to identify the version of PostgreSQL you want to install. This project uses PostgreSQL 9.3 64-bit. For this reason download the appropriate rpm package.
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">curl -O http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
+</code>
+</p>
+<p>Install the downloaded rpm. It will install the PostgreSQL repository so you can then use yum to install PostgreSQL 9.3.
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">rpm -ivh pgdg-centos93-9.3-1.noarch.rpm
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">yum install postgresql93-server
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">service postgresql-9.3 initdb
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">chkconfig postgresql-9.3 on
+</code>
+</p>
+<p>You should now be able to use the latest git you just installed locally.
+</p>
+<p>For more information visit https://wiki.postgresql.org/wiki/YUM_Installation.
+</p>
+</div>
+<div class="section" title="Configure PostgreSQL">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="installdev_configure_pgsql"/>Configure PostgreSQL
+</h2>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="installation" xmlns="http://docbook.org/ns/docbook" version="5.0" >
+    <title>Install Kamaiti Development Environment</title>
+    <para>These instructions have been created and tested using a CentOS 6.4 server. The general idea for the installation remains the same for other Linux distributions; package name and/or package managers may change.</para>
+    <para>The section for configuring Apache is very much related to CentOS. Other distributions generally don't follow the same process. If you're installing Kamaiti on another distribution, make sure you follow its procedures for configuring Apache.</para>
+    <para>It's assumed that you are fairly experienced in installing and configuring packages and know your way around a Linux distribution.</para>
+
+<section xml:id="installdev_localpython">
+    <title>Install Local Python</title>
+    <para>You will need to install local Python. The reason is that Kamaiti is built using Python 3.3 and it's not available on CentOS 6.4. There are four major steps in installing your own Python.</para>
+    <itemizedlist mark='opencircle'>
+        <listitem><para>Install Development Tools</para></listitem>
+        <listitem><para>Download Python Source Code</para></listitem>
+        <listitem><para>Compile and Install Python</para></listitem>
+        <listitem><para>Modify $PATH</para></listitem>
+    </itemizedlist>
+    <section xml:id="installdev_localpython_devtools">
+        <title>Install Development Tools</title>
+        <para>You will need some tools to compile Python. The easiest way to obtain them in CentOS is to install the ‘Development Tools’ group.</para>
+        <para><prompt>kmtuser@server:~$ </prompt><code>su -</code></para>
+        <para><prompt>root@server:~$ </prompt><code>yum groupinstall "Development Tools"</code></para>
+        <para>You also need some libraries that Python uses to provide “batteries included” support.</para>
+        <para><prompt>root@server:~$ </prompt><code>yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel</code></para>
+    </section>
+    <section xml:id="installdev_localpython_downloadsource">
+        <title>Download Python Source Code</title>
+        <para>Head over to Python.org and download version 3.3.2, used in this version of Kamaiti.</para>
+        <para><prompt>kmtuser@server:~$ </prompt><code>mkdir ~/localpython</code></para>
+        <para><prompt>kmtuser@server:~$ </prompt><code>cd ~/localpython</code></para>
+        <para><prompt>kmtuser@server:~/localpython$ </prompt><code>curl -O http://python.org/ftp/python/3.3.2/Python-3.3.2.tar.bz2</code></para>
+        <para>Now just un-tar the file so you can use its contents.</para>
+        <para><prompt>kmtuser@server:~/localpython$ </prompt><code>tar xvf Python-3.3.2.tar.bz2</code></para>
+        <para>You should see these two items in the localpython directory:</para>
+        <para><prompt>kmtuser@server:~/localpython$ </prompt><code>ls</code></para>
+        <para>Python-3.3.2  Python-3.3.2.tar.bz2</para>
+    </section>
+    <section xml:id="installdev_localpython_compileinstall">
+        <title>Compile and Install Python</title>
+        <para>You now have Python source and tools to compile it. Change directory to the un-tar’ed source code.</para>
+        <para><prompt>kmtuser@server:~/localpython$ </prompt><code>cd Python-3.3.2</code></para>
+        <para>Run configure.</para>
+        <para><prompt>kmtuser@server:~/localpython/Python-3.3.2$ </prompt><code>./configure</code></para>
+        <para>Create a directory where you will install your local Python.</para>
+        <para><prompt>kmtuser@server:~/localpython/Python-3.3.2$ </prompt><code>mkdir -p ~/usr/local</code></para>
+        <para>Compile and install Python to the directory you just created.</para>
+        <para><prompt>kmtuser@server:~/localpython/Python-3.3.2$ </prompt><code>make altinstall prefix=$HOME/usr/local exec-prefix=$HOME/usr/local</code></para>
+    </section>
+    <section xml:id="installdev_localpython_modifypath">
+        <title>Modify $PATH</title>
+        <para>You now want to add ~/usr/local/bin to your $PATH so you don’t have to enter the full path to the Python binary every time you want to use it. Change directory to where local Python binary is located.</para>
+        <para><prompt>kmtuser@server:~/localpython/Python-3.3.2$ </prompt><code>cd ~/usr/local/bin</code></para>
+        <para>Create an alias so you can refer to it as python3. This is optional but I like to do it because I can then use python to refer to the Python that came with CentOS and python3 to refer to my locally installed Python3.</para>
+        <para><prompt>kmtuser@server:~/usr/local/bin$ </prompt><code>ln -s python3.3 python3</code></para>
+        <para>Now add this path to your $PATH environment variable. Notice that we add the new path before existing $PATH. This is so that our local Python is always used before any other.</para>
+        <para><prompt>kmtuser@server:~/usr/local/bin$ </prompt><code>echo "export PATH=\$HOME/usr/local/bin:\$PATH" >> ~/.bashrc</code></para>
+        <para>Activate the new, modifed $PATH.</para>
+        <para><prompt>kmtuser@server:~/usr/local/bin$ </prompt><code>source ~/.bashrc</code></para>
+        <para>Another thing to consider is virtual environments, virtualenv or venv (in Python 3). Since Python3 comes with its built-in venv, just create an alias for its binary as well.</para>
+        <para><prompt>kmtuser@server:~/usr/local/bin$ </prompt><code>ln -s pyvenv-3.3 pyvenv</code></para>
+        <para>There’s one more modification you need to make to get pyvenv to work. Open the file and change the path to your locally installed Python.</para>
+        <para><prompt>kmtuser@server:~/usr/local/bin$ </prompt><code>vim pyvenv-3.3</code></para>
+        <para>Original line is:</para>
+        <para>#!/usr/local/bin/python3.3</para>
+        <para>After changing it should look something like:</para>
+        <para>#!/home/kmtuser/usr/local/bin/python3.3</para>
+        <para>You can now use this local pyvenv to create your virtualenvs.</para>
+    </section>
+</section>
+
+<section xml:id="installdev_virtenv">
+    <title>Create Virtual Environment</title>
+    <para>Python 3 comes with its own virtualenv built in, and it’s called venv. Run the following command to create your virtualenv.</para>
+    <para><prompt>kmtuser@server:~/usr/local/bin$ </prompt><code>pyvenv ~/kmtvenv</code></para>
+    <para>f you do an ls you’ll notice that the python you used to create this virtualenv is copied into your virtualenv. Thus your virtualenv will continue to use its local copy. You now need to “activate” this virtualenv.</para>
+    <para><prompt>kmtuser@server:~/usr/local/bin$ </prompt><code>source ~/kmtvenv/bin/activate</code></para>
+    <para>Sidebar: At some point you’ll want to “deactivate” your virtualenv. To do this just run the deactivate command.</para>
+    <para>Next step is to install setuptools. At one point Distribute was set to replace/supersede setuptools but that’s not the case anymore. Don’t worry, we’ll still use pip but to first get pip we need setuptools.</para>
+    <para><prompt>kmtuser@server:~/usr/local/bin$ </prompt><code>cd ~/kmtvenv</code></para>
+    <para><prompt>kmtuser@server:~/kmtvenv$ </prompt><code>mkdir pypioffline</code></para>
+    <para><prompt>kmtuser@server:~/kmtvenv$ </prompt><code>cd pypioffline</code></para>
+    <para>The latest version of setup tools at the time of writing was 1.1.6 so we’ll download it to the temporary/optional directory pypioffline.</para>
+    <para><prompt>kmtuser@server:~/kmtvenv/pypioffline$ </prompt><code>curl -O https://pypi.python.org/packages/source/s/setuptools/setuptools-1.1.6.tar.gz</code></para>
+    <para><prompt>kmtuser@server:~/kmtvenv/pypioffline$ </prompt><code>tar xvzf setuptools-1.1.6.tar.gz</code></para>
+    <para><prompt>kmtuser@server:~/kmtvenv/pypioffline$ </prompt><code>cd setuptools-1.1.6</code></para>
+    <para><prompt>kmtuser@server:~/kmtvenv/pypioffline/setuptools-1.1.6$ </prompt><code>python ez_setup.py</code></para>
+    <para><prompt>kmtuser@server:~/kmtvenv/pypioffline/setuptools-1.1.6$ </prompt><code>easy_install pip</code></para>
+    <para>You can installed pip and can now start using it to install all the other things.</para>
+    <para></para>
+    <para></para>
+</section>
+
+<section xml:id="installdev_install_git">
+    <title>Install git</title>
+    <para>You will need to install git to download the latest source code for Kamaiti from GitHub.</para>
+    <para><prompt>kmtuser@server:~$ </prompt><code>su -</code></para>
+    <para><prompt>root@server:~$ </prompt><code>yum install git</code></para>
+    <para>The git version is older in the CentOS repositories. I recommend installing the latest git release locally, similar to what we did with Python 3.3.</para>
+    <para><prompt>kmtuser@server:~$ </prompt><code>mkdir ~/localgit</code></para>
+    
+    <para><prompt>kmtuser@server:~$ </prompt><code>git clone https://github.com/git/git ~/localgit</code></para>
+    <para><prompt>kmtuser@server:~$ </prompt><code>su -</code></para>
+    <para><prompt>root@server:~$ </prompt><code>yum install libcurl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel</code></para>
+    <para><prompt>root@server:~$ </prompt><code>logout</code></para>
+    <para><prompt>kmtuser@server:~$ </prompt><code>cd ~/localgit</code></para>
+    <para><prompt>kmtuser@server:~/localgit$ </prompt><code>cd git</code></para>
+    <para><prompt>kmtuser@server:~/localgit/git$ </prompt><code>make prefix=~/usr/local all</code></para>
+    <para><prompt>kmtuser@server:~/localgit/git$ </prompt><code>make prefix=~/usr/local install</code></para>
+    <para><prompt>kmtuser@server:~/localgit/git$ </prompt><code>ls /usr/local/bin</code></para>
+    <para><prompt>kmtuser@server:~/localgit/git$ </prompt><code>source ~/.bashrc</code></para>
+    <para>You should now be able to use the latest git you just installed locally.</para>
+</section>
+
+<section xml:id="installdev_install_pgsql">
+    <title>Install PostgreSQL</title>
+    <para>You will need to install PostgreSQL. You could technically use MySQL instead since there's no PGSQL specific things used in Kamaiti. But the code was developed and tested using PGSQL so it's recommended.</para>
+    <para>One reason for using CentOS as development machine is the level of support you get from various projects. PostgreSQL is no exception. They provide their own repositories which make it easy to install the latest version of PostgreSQL.</para>
+    <para>First you need to configure your CentOS repository to not install the PostgreSQL that comes with CentOS. Edit the file /etc/yum.repos.d/CentOS-Base.repo.</para>
+    <para><prompt>kmtuser@server:~$ </prompt><code>su -</code></para>
+    <para><prompt>root@server:~$ </prompt><code>vim /etc/yum.repos.d/CentOS-Base.repo</code></para>
+    <para>Under both sections [base] and [updates], append the following line and save the file.</para>
+    <para>exclude=postgresql*</para>
+    <para>Next, you want to identify the version of PostgreSQL you want to install. This project uses PostgreSQL 9.3 64-bit. For this reason download the appropriate rpm package.</para>
+    <para><prompt>root@server:~$ </prompt><code>curl -O http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm</code></para>
+    <para>Install the downloaded rpm. It will install the PostgreSQL repository so you can then use yum to install PostgreSQL 9.3.</para>
+    <para><prompt>root@server:~$ </prompt><code>rpm -ivh pgdg-centos93-9.3-1.noarch.rpm</code></para>
+    <para><prompt>root@server:~$ </prompt><code>yum install postgresql93-server</code></para>
+    <para><prompt>root@server:~$ </prompt><code>service postgresql-9.3 initdb</code></para>
+    <para><prompt>root@server:~$ </prompt><code>chkconfig postgresql-9.3 on</code></para>
+    <para>You should now be able to use the latest git you just installed locally.</para>
+    <para>For more information visit https://wiki.postgresql.org/wiki/YUM_Installation.</para>
+</section>
+
+<section xml:id="installdev_configure_pgsql">
+    <title>Configure PostgreSQL</title>
+</section>
+
+</chapter>

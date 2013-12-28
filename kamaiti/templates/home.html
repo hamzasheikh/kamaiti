@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}Home{% endblock title %}
+{% block description %}Kamaiti is a system for participants to pool their money every month and give to one participant{% endblock description %}
+{% block currentpagehome %}current{% endblock currentpagehome %}
+{% block currentpagetellmemore %}{% endblock currentpagetellmemore %}
+{% block currentpagesignup %}{% endblock currentpagesignup %}
+{% block currentpagelogin %}{% endblock currentpagelogin %}
+{% block pageheader %}Succeed in 3 Easy Steps{% endblock pageheader %}
+{% block pagecontent %}
+<!-- more articles
+ ================================================== -->
+<div id="more-articles" class="container">
+
+<article class="cf">
+    
+    <div class="grid4 a-left first">
+        <h3><a href="#">Gather Your Friends</a></h3>
+    </div>
+    
+    <div class="grid8 a-right">
+        
+        <p>Any Kamaiti works best when you have a group of friends and family, people you trust. The goal is simple: help each other out while helping yourself.</p>
+        
+        
+    </div>
+    
+</article>
+
+<article class="cf">
+    
+    <div class="grid4 a-left first">
+        <h3><a href="#">Pool Your Money</a></h3>
+    </div>
+    
+    <div class="grid8 a-right">
+        
+        <p>Get together each month and contribute to the pool. Give all this money to one person in the group.</p>
+        
+        
+    </div>
+    
+</article>
+
+<article class="cf">
+    
+    <div class="grid4 a-left first">
+        <h3><a href="#">Realize Your Dreams</a></h3>
+    </div>
+    
+    <div class="grid8 a-right">
+        
+        <p>Use this money to make your dreams come true. Need a vacation? Getting your car fixed? House needs repairs? Your friends just helped you out, and you have to pay zero interest. You just pay back every month.</p>
+        <p>Questions? <a href="/tellmemore/">Learn More...</a></p>
+        
+    </div>
+    
+</article>
+
+
+</div>
+
+<!-- search section
+ ================================================== -->
+<div id="search-section" class="container">
+    
+    
+    <div class="grid4 a-left first">
+        <p>What Are You Waiting For?</p>
+    </div>
+    
+    <div class="grid8 a-right">
+        <p class="continue cf"><a class="button" href="/sign-up/">Sign Up</a> &nbsp; <a class="button" href="/log-in/">Log In</a></p>
+    </div>
+</div>
+{% endblock pagecontent %}

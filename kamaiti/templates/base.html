@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if lt IE 8 ]><html class="ie ie7" lang="en"> <![endif]-->
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -7,15 +8,16 @@
    <!--- Basic Page Needs
    ================================================== -->
 	<meta charset="utf-8">
-	<title>Kamaiti</title>
-	<meta name="description" content="">
-	<meta name="author" content="">
+	<title>
+        Kamaiti - {% block title %}Home{% endblock title %}
+    </title>
+	<meta name="description" content="{% block description %}{% endblock description %}">
+	<meta name="author" content="Hamza Sheikh">
 
 	<!-- CSS
    ================================================== -->
-	<link rel="stylesheet" href="../static/css/base.css">
-	<link rel="stylesheet" href="../static/css/layout.css">
-
+	<link rel="stylesheet" href="{% static "css/base.css" %}">
+	<link rel="stylesheet" href="{% static "css/layout.css" %}">
 
 
 </head>
@@ -37,10 +39,10 @@
          <nav id="nav-wrap" class="cf">
 
             <ul id="menu">
-	            <li class="current"><a href="/">Home</a></li>
-	            <li><a href="/tell-me-more/">Tell Me More</a></li>
-	            <li><a href="/sign-up/">Sign Up</a></li>
-	            <li><a href="/log-in/">Log In</a></li>
+	            <li class="{% block currentpagehome %}current{% endblock currentpagehome %}"><a href="/">Home</a></li>
+	            <li class="{% block currentpagetellmemore %}current{% endblock currentpagetellmemore %}"><a href="/tell-me-more/">Tell Me More</a></li>
+	            <li class="{% block currentpagesignup %}current{% endblock currentpagesignup %}"><a href="/sign-up/">Sign Up</a></li>
+	            <li class="{% block currentpagelogin %}current{% endblock currentpagelogin %}"><a href="/log-in/">Log In</a></li>
             </ul> <!-- end #menu -->
 
          </nav>
@@ -51,15 +53,17 @@
       ================================================== -->
       <article id="latest-article" class="container">
 
-         <h2>Succeed in 3 Easy Steps</h2>
+         <h2>{% block pageheader %}Succeed in 3 Easy Steps{% endblock pageheader %}</h2>
 
       </article>
       
       
-
+      <div id="page-content">
+        {% block pagecontent %}
       <!-- more articles
       ================================================== -->
       <div id="more-articles" class="container">
+
 
          <article class="cf">
 
@@ -106,6 +110,7 @@
 
          </article>
 
+
       </div>
 
       <!-- search section
@@ -121,7 +126,8 @@
                 <p class="continue cf"><a class="button" href="/sign-up/">Sign Up</a> &nbsp; <a class="button" href="/log-in/">Log In</a></p>
             </div>
       </div>
-
+      {% endblock pagecontent %}
+      </div>
    </div> <!-- end content-wrap -->
 
    <!-- footer

@@ -1,4 +1,4 @@
-kamaiti
+Kamaiti
 =======
 People of South Asia have used this system for generations. They pool their money every month and use it to pay for large expenses. At the end of the "kamaiti" cycle, everyone will have paid into the pool exactly what they received during it.
 

@@ -12,4 +12,12 @@
         <para>There's usually one trusted person designated as the manager of the Kamaiti. All participants give their share of the pool to this manager, who then disperses the pool to the intended recipient.</para>
         <para>This project is an attempt to modernize the management of a Kamaiti. The main goal is to create a simple system used by the manager to keep track of members, pool, monthly participation, etc. Communication between participants might also be made easier through this project.</para>
     </section>
+    <section xml:id="introduction_releases">
+        <title>Releases</title>
+        <para>Releases will use a positive integer, starting with one, for version number. Basically, new releases will be made for the following reasons.</para>
+        <para>Changes to underlying technology. For example, if we start using a newer version of Django or PostgreSQL or whatever.</para>
+        <para>Adding new features. We can combine various features into a release or provide just one new feature.</para>
+        <para>When we have fixes for bugs. Bug fixes will not be backported to a previous release. Instead, the bug fixes will be in a future release.</para>
+        <para>Whenever a new release is made we'll attempt to provide upgrade steps.</para>
+    </section>
 </chapter>

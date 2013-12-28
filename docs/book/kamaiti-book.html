@@ -31,16 +31,16 @@
 </div>
 </div>
 <div>
-<p class="releaseinfo">This book covers version 0.0.1 of Kamaiti
+<p class="releaseinfo">This book covers version 1 of Kamaiti
 </p>
 </div>
 <div>
-<p class="copyright">Copyright © 2013 Hamza Sheikh
+<p class="copyright">Copyright © 2013, 2014 Hamza Sheikh
 </p>
 </div>
 <div>
 <div class="legalnotice" title="Legal Notice">
-<a id="idp24795936"/>
+<a id="idp81088"/>
 <p>Redistribution and use in source (SGML DocBook) and 'compiled' forms (SGML, HTML, PDF, PostScript, RTF and so forth) with or without modification, are permitted provided that the following conditions are met:
 </p>
 <div class="itemizedlist">
@@ -79,6 +79,12 @@
 <dt>
 <span class="section">
 <a href="#introduction_kamaiti">What is a Kamaiti?
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#introduction_releases">Releases
 </a>
 </span>
 </dt>
@@ -150,6 +156,12 @@
 </a>
 </span>
 </dt>
+<dt>
+<span class="section">
+<a href="#installdev_download_kamaiti">Download Kamaiti
+</a>
+</span>
+</dt>
 </dl>
 </dd>
 </dl>
@@ -173,6 +185,12 @@
 <dt>
 <span class="section">
 <a href="#introduction_kamaiti">What is a Kamaiti?
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#introduction_releases">Releases
 </a>
 </span>
 </dt>
@@ -203,6 +221,27 @@
 <p>There's usually one trusted person designated as the manager of the Kamaiti. All participants give their share of the pool to this manager, who then disperses the pool to the intended recipient.
 </p>
 <p>This project is an attempt to modernize the management of a Kamaiti. The main goal is to create a simple system used by the manager to keep track of members, pool, monthly participation, etc. Communication between participants might also be made easier through this project.
+</p>
+</div>
+<div class="section" title="Releases">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="introduction_releases"/>Releases
+</h2>
+</div>
+</div>
+</div>
+<p>Releases will use a positive integer, starting with one, for version number. Basically, new releases will be made for the following reasons.
+</p>
+<p>Changes to underlying technology. For example, if we start using a newer version of Django or PostgreSQL or whatever.
+</p>
+<p>Adding new features. We can combine various features into a release or provide just one new feature.
+</p>
+<p>When we have fixes for bugs. Bug fixes will not be backported to a previous release. Instead, the bug fixes will be in a future release.
+</p>
+<p>Whenever a new release is made we'll attempt to provide upgrade steps.
 </p>
 </div>
 </div>
@@ -277,6 +316,12 @@
 <dt>
 <span class="section">
 <a href="#installdev_configure_pgsql">Configure PostgreSQL
+</a>
+</span>
+</dt>
+<dt>
+<span class="section">
+<a href="#installdev_download_kamaiti">Download Kamaiti
 </a>
 </span>
 </dt>
@@ -776,6 +821,161 @@
 </div>
 </div>
 </div>
+<p>I recommend that you create a universal admin account for PGSQL, which you can use to administer the installation.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">su -
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">su postgres
+</code>
+</p>
+<p>
+<code class="prompt">bash-4.1$ 
+</code>
+<code class="code">createuser --pwprompt --superuser pgdbadmin
+</code>
+</p>
+<p>You'll be asked to provide a user password. Since this is for the administrator, choose a really secure one.
+</p>
+<p>
+<code class="prompt">bash-4.2$ 
+</code>
+<code class="code">exit
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">vim /var/lib/pgsql/9.3/data/pg_hba.conf
+</code>
+</p>
+<p>Add the following line just above "local all all peer", then save the file and close vim.
+</p>
+<p>
+<code class="code">local   all             pgdbadmin                               password
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">service postgresql-9.3 reload
+</code>
+</p>
+<p>Once you have a PGSQL server installed and running, you need to configure it for Kamaiti. You need to decide three things: database name, username, and password. I highly recommend that you use the default database and user name but choose your own secure password. These three pieces of information will also be required to later configure Django.
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">su postgres
+</code>
+</p>
+<p>
+<code class="prompt">bash-4.2$ 
+</code>
+<code class="code">createdb --owner pgdbadmin --template template1 --encoding UTF8 --lc-collate 'en_US.UTF-8' --lc-ctype 'en_US.UTF-8' kamaitidb
+</code>
+</p>
+<p>
+<code class="prompt">bash-4.2$ 
+</code>
+<code class="code">createuser --pwprompt kamaitidbadmin
+</code>
+</p>
+<p>Provide a password and answer 'no' to the first two questions ("Shall the new role be a superuser?" and "Shall the new role be allowed to create databases?") and answer 'yes' to the final question ("Shall the new role be allowed to create more new roles?").
+</p>
+<p>Remember that this user/password will be required/used in Django's settings file.
+</p>
+<p>
+<code class="prompt">bash-4.2$ 
+</code>
+<code class="code">psql kamaitidb -W pgdbadmin
+</code>
+</p>
+<p>Provide the password to login.
+</p>
+<p>
+<code class="prompt">kamaitidb=# 
+</code>
+<code class="code">grant all on database kamaitidb to kamaitidbadmin
+</code>
+</p>
+<p>
+<code class="prompt">kamaitidb=# 
+</code>
+<code class="code">\q
+</code>
+</p>
+<p>
+<code class="prompt">bash-4.2$ 
+</code>
+<code class="code">exit
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">vim /var/lib/pgsql/9.3/data/pg_hba.conf
+</code>
+</p>
+<p>Add the following line just below "local all pgdbadmin password", then save the file and close vim.
+</p>
+<p>
+<code class="code">local   kamaitidb       kamaitidbadmin                          password
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">service postgresql-9.3 reload
+</code>
+</p>
+<p>
+<code class="prompt">root@server:~$ 
+</code>
+<code class="code">exit
+</code>
+</p>
+<p>Verify the setup was successful
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">psql kamaitidb -W kamaitidbadmin
+</code>
+</p>
+<p>
+<code class="prompt">kamaitidb=# 
+</code>
+<code class="code">\q
+</code>
+</p>
+</div>
+<div class="section" title="Download Kamaiti">
+<div class="titlepage">
+<div>
+<div>
+<h2 class="title">
+<a id="installdev_download_kamaiti"/>Download Kamaiti
+</h2>
+</div>
+</div>
+</div>
+<p>You'll download the code for Kamaiti from GitHub to your home directory.
+</p>
+<p>
+<code class="prompt">kmtuser@server:~$ 
+</code>
+<code class="code">git clone git://github.com/hamzasheikh/kamaiti.git ~/kamaiti
+</code>
+</p>
+<p>That's really all you need to do to get the code and start hacking on it.
+</p>
 </div>
 </div>
 </div>

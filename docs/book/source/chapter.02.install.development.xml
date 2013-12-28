@@ -132,6 +132,42 @@
 
 <section xml:id="installdev_configure_pgsql">
     <title>Configure PostgreSQL</title>
+    <para>I recommend that you create a universal admin account for PGSQL, which you can use to administer the installation.</para>
+    <para><prompt>kmtuser@server:~$ </prompt><code>su -</code></para>
+    <para><prompt>root@server:~$ </prompt><code>su postgres</code></para>
+    <para><prompt>bash-4.1$ </prompt><code>createuser --pwprompt --superuser pgdbadmin</code></para>
+    <para>You'll be asked to provide a user password. Since this is for the administrator, choose a really secure one.</para>
+    <para><prompt>bash-4.2$ </prompt><code>exit</code></para>
+    <para><prompt>root@server:~$ </prompt><code>vim /var/lib/pgsql/9.3/data/pg_hba.conf</code></para>
+    <para>Add the following line just above "local all all peer", then save the file and close vim.</para>
+    <para><code>local   all             pgdbadmin                               password</code></para>
+    <para><prompt>root@server:~$ </prompt><code>service postgresql-9.3 reload</code></para>
+    <para>Once you have a PGSQL server installed and running, you need to configure it for Kamaiti. You need to decide three things: database name, username, and password. I highly recommend that you use the default database and user name but choose your own secure password. These three pieces of information will also be required to later configure Django.</para>
+    <para><prompt>root@server:~$ </prompt><code>su postgres</code></para>
+    <para><prompt>bash-4.2$ </prompt><code>createdb --owner pgdbadmin --template template1 --encoding UTF8 --lc-collate 'en_US.UTF-8' --lc-ctype 'en_US.UTF-8' kamaitidb</code></para>
+    <para><prompt>bash-4.2$ </prompt><code>createuser --pwprompt kamaitidbadmin</code></para>
+    <para>Provide a password and answer 'no' to the first two questions ("Shall the new role be a superuser?" and "Shall the new role be allowed to create databases?") and answer 'yes' to the final question ("Shall the new role be allowed to create more new roles?").</para>
+    <para>Remember that this user/password will be required/used in Django's settings file.</para>
+    <para><prompt>bash-4.2$ </prompt><code>psql kamaitidb -W pgdbadmin</code></para>
+    <para>Provide the password to login.</para>
+    <para><prompt>kamaitidb=# </prompt><code>grant all on database kamaitidb to kamaitidbadmin</code></para>
+    <para><prompt>kamaitidb=# </prompt><code>\q</code></para>
+    <para><prompt>bash-4.2$ </prompt><code>exit</code></para>
+    <para><prompt>root@server:~$ </prompt><code>vim /var/lib/pgsql/9.3/data/pg_hba.conf</code></para>
+    <para>Add the following line just below "local all pgdbadmin password", then save the file and close vim.</para>
+    <para><code>local   kamaitidb       kamaitidbadmin                          password</code></para>
+    <para><prompt>root@server:~$ </prompt><code>service postgresql-9.3 reload</code></para>
+    <para><prompt>root@server:~$ </prompt><code>exit</code></para>
+    <para>Verify the setup was successful</para>
+    <para><prompt>kmtuser@server:~$ </prompt><code>psql kamaitidb -W kamaitidbadmin</code></para>
+    <para><prompt>kamaitidb=# </prompt><code>\q</code></para>
+</section>
+
+<section xml:id="installdev_download_kamaiti">
+    <title>Download Kamaiti</title>
+    <para>You'll download the code for Kamaiti from GitHub to your home directory.</para>
+    <para><prompt>kmtuser@server:~$ </prompt><code>git clone git://github.com/hamzasheikh/kamaiti.git ~/kamaiti</code></para>
+    <para>That's really all you need to do to get the code and start hacking on it.</para>
 </section>
 
 </chapter>

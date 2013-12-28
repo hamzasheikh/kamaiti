@@ -5,8 +5,12 @@
         <author>
             <personname><firstname>Hamza</firstname><surname>Sheikh</surname></personname>
         </author>
-        <releaseinfo>This book covers version 0.0.1 of Kamaiti</releaseinfo>
-        <copyright><year>2013</year><holder>Hamza Sheikh</holder></copyright>
+        <releaseinfo>This book covers version 1 of Kamaiti</releaseinfo>
+        <copyright>
+            <year>2013</year>
+            <year>2014</year>
+            <holder>Hamza Sheikh</holder>
+        </copyright>
         <legalnotice>
             <para>Redistribution and use in source (SGML DocBook) and 'compiled' forms (SGML, HTML, PDF, PostScript, RTF and so forth) with or without modification, are permitted provided that the following conditions are met:</para>
             <itemizedlist mark='opencircle'>

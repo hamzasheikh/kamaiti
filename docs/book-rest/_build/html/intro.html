@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Discover Kamaiti &mdash; Kamaiti 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Kamaiti 1 documentation" href="index.html" />
+    <link rel="next" title="Install Kamaiti Development Environment" href="devinstall.html" />
+    <link rel="prev" title="Welcome to Kamaiti’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="devinstall.html" title="Install Kamaiti Development Environment"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Kamaiti’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Kamaiti 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="discover-kamaiti">
+<h1>Discover Kamaiti<a class="headerlink" href="#discover-kamaiti" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="what-is-kamaiti">
+<h2>What is Kamaiti?<a class="headerlink" href="#what-is-kamaiti" title="Permalink to this headline">¶</a></h2>
+<p>Kamaiti is a system generally used in South Asia where a group of trusted family and friends pool their money every month and give it to one person in the group. The recipient then uses it to deal with important, sometimes large, expenses.</p>
+<p>Take a simple example. A group of twelve friends get together and each participant agrees to put $100 each month in the pool for a year. Every month one of the participant receives the total pool for the month, i.e. $1200. During the year, each participant receives the pool exactly once. At the end of the year, each participant has contributed $1200 to the pool and also received $1200.</p>
+<p>In essense, Kamaiti is a saving scheme where you get to spend money when you need it. You may also think of it as an interest-free loan given to one participant every month by all participants of the Kamaiti.</p>
+<p>The size of the group is usually small and trusted family and friends participate. It gives a chance for people to help someone out each month so they may meet large or unexpected expenses.</p>
+<p>The size of the group, individual contribution, pool size, etc. are tweaked according to the needs of the participants. Some Kamaitis last a year but others may be shorter or longer.</p>
+<p>In certain parts this is known as BC or VC.</p>
+<p>There&#8217;s usually one trusted person designated as the manager of the Kamaiti. All participants give their share of the pool to this manager, who then disperses the pool to the intended recipient.</p>
+<p>This project is an attempt to modernize the management of a Kamaiti. The main goal is to create a simple system used by the manager to keep track of members, pool, monthly participation, etc. Communication between participants might also be made easier through this project.</p>
+</div>
+<div class="section" id="releases">
+<h2>Releases<a class="headerlink" href="#releases" title="Permalink to this headline">¶</a></h2>
+<p>Releases will use a positive integer, starting with one, for version number. Basically, new releases will be made for the following reasons.</p>
+<ul class="simple">
+<li>Changes to underlying technology. For example, if we start using a newer version of Django or PostgreSQL or whatever.</li>
+<li>Adding new features. We can combine various features into a release or provide just one new feature.</li>
+<li>When we have fixes for bugs. Bug fixes will not be backported to a previous release. Instead, the bug fixes will be in a future release.</li>
+</ul>
+<p>Whenever a new release is made we&#8217;ll attempt to provide upgrade and downgrade steps.</p>
+</div>
+<div class="section" id="project-license">
+<h2>Project License<a class="headerlink" href="#project-license" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="preamble">
+<h3>Preamble<a class="headerlink" href="#preamble" title="Permalink to this headline">¶</a></h3>
+<p>Kamaiti uses the MIT License. You can read more about it at <a class="reference external" href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a>.</p>
+<p>The reason I chose MIT License was because of its simplicity. A layperson such as myself can easily read and understand the terms. In a very simplistic view this is a &#8220;do as you please&#8221; license.</p>
+<p>Initially I had chosen the BSD 2-Clause License for the code and when it came time to license the documentation I chose the FreeBSD Documentation License. However, I didn&#8217;t feel comfortable editing a license to fit my project. For example, FreeBSD uses DocBook for its documentation and the license specifically mentions it. Since I use reStructuredText I had to edit the license.</p>
+<p>From my understanding the MIT License covers code and documentation and this made my life simple. So I switched from BSD License to MIT License. They are essentially the same but I just feel more comfortable with the MIT License.</p>
+</div>
+<div class="section" id="license-text">
+<h3>License Text<a class="headerlink" href="#license-text" title="Permalink to this headline">¶</a></h3>
+<p>Copyright (c) 2013 Hamza Sheikh</p>
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the &#8220;Software&#8221;), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+<p>THE SOFTWARE IS PROVIDED &#8220;AS IS&#8221;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Discover Kamaiti</a><ul>
+<li><a class="reference internal" href="#what-is-kamaiti">What is Kamaiti?</a></li>
+<li><a class="reference internal" href="#releases">Releases</a></li>
+<li><a class="reference internal" href="#project-license">Project License</a><ul>
+<li><a class="reference internal" href="#preamble">Preamble</a></li>
+<li><a class="reference internal" href="#license-text">License Text</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to Kamaiti&#8217;s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="devinstall.html"
+                        title="next chapter">Install Kamaiti Development Environment</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/intro.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="devinstall.html" title="Install Kamaiti Development Environment"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to Kamaiti’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">Kamaiti 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Hamza Sheikh.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>

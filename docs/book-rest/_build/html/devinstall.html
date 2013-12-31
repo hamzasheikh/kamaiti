@@ -1,0 +1,416 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Install Kamaiti Development Environment &mdash; Kamaiti 1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Kamaiti 1 documentation" href="index.html" />
+    <link rel="prev" title="Discover Kamaiti" href="intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="intro.html" title="Discover Kamaiti"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Kamaiti 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="install-kamaiti-development-environment">
+<h1>Install Kamaiti Development Environment<a class="headerlink" href="#install-kamaiti-development-environment" title="Permalink to this headline">¶</a></h1>
+<p>These instructions have been created and tested using a CentOS 6.4 server. The general idea for the installation remains the same for other Linux distributions; package name and/or package managers may change.</p>
+<p>The section for configuring Apache is very much related to CentOS. Other distributions generally don&#8217;t follow the same process. If you&#8217;re installing Kamaiti on another distribution, make sure you follow its procedures for configuring Apache.</p>
+<p>It&#8217;s assumed that you are fairly experienced in installing and configuring packages and know your way around a Linux distribution.</p>
+<div class="section" id="install-local-python">
+<h2>Install Local Python<a class="headerlink" href="#install-local-python" title="Permalink to this headline">¶</a></h2>
+<p>You will need to install local Python. The reason is that Kamaiti is built using Python 3.3 and it&#8217;s not available on CentOS 6.4. There are four major steps in installing your own Python.</p>
+<ul class="simple">
+<li>Install Development Tools</li>
+<li>Download Python Source Code</li>
+<li>Compile and Install Python</li>
+<li>Modify $PATH</li>
+</ul>
+<div class="section" id="install-development-tools">
+<h3>Install Development Tools<a class="headerlink" href="#install-development-tools" title="Permalink to this headline">¶</a></h3>
+<p>You will need some tools to compile Python. The easiest way to obtain them in CentOS is to install the ‘Development Tools’ group.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ su -
+root@server:~$ yum groupinstall &quot;Development Tools&quot;
+</pre></div>
+</div>
+<p>You also need some libraries that Python uses to provide “batteries included” support.</p>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ yum install openssl-devel bzip2-devel expat-devel gdbm-devel readline-devel sqlite-devel
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-python-source-code">
+<h3>Download Python Source Code<a class="headerlink" href="#download-python-source-code" title="Permalink to this headline">¶</a></h3>
+<p>Head over to Python.org and download version 3.3.2, used in this version of Kamaiti.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ mkdir ~/localpython
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ cd ~/localpython
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localpython$ curl -O http://python.org/ftp/python/3.3.2/Python-3.3.2.tar.bz2
+</pre></div>
+</div>
+<p>Now just un-tar the file so you can use its contents.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localpython$ tar xvf Python-3.3.2.tar.bz2
+</pre></div>
+</div>
+<p>If you do an <em>ls</em> of the directory,</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localpython$ ls
+</pre></div>
+</div>
+<p>you should see these two items in the localpython directory.</p>
+<blockquote>
+<div>Python-3.3.2  Python-3.3.2.tar.bz2</div></blockquote>
+</div>
+<div class="section" id="compile-and-install-python">
+<h3>Compile and Install Python<a class="headerlink" href="#compile-and-install-python" title="Permalink to this headline">¶</a></h3>
+<p>You now have Python source and tools to compile it. Change directory to the un-tar’ed source code.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localpython$ cd Python-3.3.2
+</pre></div>
+</div>
+<p>Run configure.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localpython/Python-3.3.2$ ./configure
+</pre></div>
+</div>
+<p>Create a directory where you will install your local Python.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localpython/Python-3.3.2$ mkdir -p ~/usr/local
+</pre></div>
+</div>
+<p>Compile and install Python to the directory you just created.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localpython/Python-3.3.2$ make altinstall prefix=$HOME/usr/local exec-prefix=$HOME/usr/local
+</pre></div>
+</div>
+</div>
+<div class="section" id="modify-path">
+<h3>Modify $PATH<a class="headerlink" href="#modify-path" title="Permalink to this headline">¶</a></h3>
+<p>You now want to add ~/usr/local/bin to your $PATH so you don’t have to enter the full path to the Python binary every time you want to use it. Change directory to where local Python binary is located.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localpython/Python-3.3.2$ cd ~/usr/local/bin
+</pre></div>
+</div>
+<p>Create an alias so you can refer to it as python3. This is optional but I like to do it because I can then use python to refer to the Python that came with CentOS and python3 to refer to my locally installed Python3.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/usr/local/bin$ ln -s python3.3 python3
+</pre></div>
+</div>
+<p>Now add this path to your $PATH environment variable. Notice that we add the new path before existing $PATH. This is so that our local Python is always used before any other.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/usr/local/bin$ echo &quot;export PATH=\$HOME/usr/local/bin:\$PATH&quot; &gt;&gt; ~/.bashrc
+</pre></div>
+</div>
+<p>Activate the new, modifed $PATH.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/usr/local/bin$ source ~/.bashrc
+</pre></div>
+</div>
+<p>Another thing to consider is virtual environments, virtualenv or venv (in Python 3). Since Python3 comes with its built-in venv, just create an alias for its binary as well.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/usr/local/bin$ ln -s pyvenv-3.3 pyvenv
+</pre></div>
+</div>
+<p>There’s one more modification you need to make to get pyvenv to work. Open the file and change the path to your locally installed Python.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/usr/local/bin$ vim pyvenv-3.3
+</pre></div>
+</div>
+<p>Original line is:</p>
+<blockquote>
+<div>#!/usr/local/bin/python3.3</div></blockquote>
+<p>After changing it should look something like:</p>
+<blockquote>
+<div>#!/home/kmtuser/usr/local/bin/python3.3</div></blockquote>
+<p>You can now use this local pyvenv to create your virtualenvs.</p>
+</div>
+</div>
+<div class="section" id="create-virtual-environment">
+<h2>Create Virtual Environment<a class="headerlink" href="#create-virtual-environment" title="Permalink to this headline">¶</a></h2>
+<p>Python 3 comes with its own virtualenv built in, and it’s called venv. Run the following command to create your virtualenv.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/usr/local/bin$ pyvenv ~/kmtvenv
+</pre></div>
+</div>
+<p>If you do an ls you’ll notice that the python you used to create this virtualenv is copied into your virtualenv. Thus your virtualenv will continue to use its local copy. You now need to “activate” this virtualenv.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/usr/local/bin$ source ~/kmtvenv/bin/activate
+</pre></div>
+</div>
+<p>Sidebar: At some point you’ll want to exit this virtualenv. Run the <tt class="docutils literal"><span class="pre">deactivate</span></tt> command.</p>
+<p>Next step is to install setuptools. At one point Distribute was set to replace/supersede setuptools but that’s not the case anymore. Don’t worry, we’ll still use pip but to first get pip we need setuptools.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/usr/local/bin$ cd ~/kmtvenv
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/kmtvenv$ mkdir pypioffline
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/kmtvenv$ cd pypioffline
+</pre></div>
+</div>
+<p>The latest version of setup tools at the time of writing was 1.1.6 so we’ll download it to the temporary/optional directory pypioffline.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/kmtvenv/pypioffline$ curl -O https://pypi.python.org/packages/source/s/setuptools/setuptools-1.1.6.tar.gz
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/kmtvenv/pypioffline$ tar xvzf setuptools-1.1.6.tar.gz
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/kmtvenv/pypioffline$ cd setuptools-1.1.6
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/kmtvenv/pypioffline/setuptools-1.1.6$ python ez_setup.py
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/kmtvenv/pypioffline/setuptools-1.1.6$ easy_install pip
+</pre></div>
+</div>
+<p>You have installed pip and can now start using it to install all the other things.</p>
+</div>
+<div class="section" id="install-git">
+<h2>Install git<a class="headerlink" href="#install-git" title="Permalink to this headline">¶</a></h2>
+<p>You will need to install git to download the latest source code for Kamaiti from GitHub.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ su -
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ yum install git
+</pre></div>
+</div>
+<p>The git version is older in the CentOS repositories. I recommend installing the latest git release locally, similar to what we did with Python 3.3.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ mkdir ~/localgit
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ git clone https://github.com/git/git ~/localgit
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ su -
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ yum install libcurl-devel expat-devel gettext-devel openssl-devel zlib-devel perl-devel
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ logout
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ cd ~/localgit
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localgit$ cd git
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localgit/git$ make prefix=~/usr/local all
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localgit/git$ make prefix=~/usr/local install
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localgit/git$ ls /usr/local/bin
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~/localgit/git$ source ~/.bashrc
+</pre></div>
+</div>
+<p>You should now be able to use the latest git you just installed locally.</p>
+</div>
+<div class="section" id="install-postgresql">
+<h2>Install PostgreSQL<a class="headerlink" href="#install-postgresql" title="Permalink to this headline">¶</a></h2>
+<p>You will need to install PostgreSQL. You could technically use MySQL instead since there&#8217;s no PGSQL specific things used in Kamaiti. But the code was developed and tested using PGSQL so it&#8217;s recommended.</p>
+<p>One reason for using CentOS as development machine is the level of support you get from various projects. PostgreSQL is no exception. They provide their own repositories which make it easy to install the latest version of PostgreSQL.</p>
+<p>First you need to configure your CentOS repository to not install the PostgreSQL that comes with CentOS. Edit the file /etc/yum.repos.d/CentOS-Base.repo.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ su -
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ vim /etc/yum.repos.d/CentOS-Base.repo
+</pre></div>
+</div>
+<p>Under both sections [base] and [updates], append the following line and save the file.</p>
+<p>exclude=postgresql*</p>
+<p>Next, you want to identify the version of PostgreSQL you want to install. This project uses PostgreSQL 9.3 64-bit. For this reason download the appropriate rpm package.</p>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ curl -O http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
+</pre></div>
+</div>
+<p>Install the downloaded rpm. It will install the PostgreSQL repository so you can then use yum to install PostgreSQL 9.3.</p>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ rpm -ivh pgdg-centos93-9.3-1.noarch.rpm
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ yum install postgresql93-server
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ service postgresql-9.3 initdb
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ chkconfig postgresql-9.3 on
+</pre></div>
+</div>
+<p>You should now be able to use the latest git you just installed locally.</p>
+<p>For more information visit <a class="reference external" href="https://wiki.postgresql.org/wiki/YUM_Installation">https://wiki.postgresql.org/wiki/YUM_Installation</a>.</p>
+</div>
+<div class="section" id="configure-postgresql">
+<h2>Configure PostgreSQL<a class="headerlink" href="#configure-postgresql" title="Permalink to this headline">¶</a></h2>
+<p>I recommend that you create a universal admin account for PGSQL, which you can use to administer the installation.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ su -
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ su postgres
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>bash-4.1$ createuser --pwprompt --superuser pgdbadmin
+</pre></div>
+</div>
+<p>You&#8217;ll be asked to provide a user password. Since this is for the administrator, choose a really secure one.</p>
+<div class="highlight-text"><div class="highlight"><pre>bash-4.2$ exit
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ vim /var/lib/pgsql/9.3/data/pg_hba.conf
+</pre></div>
+</div>
+<p>Add the following line just above &#8220;local all all peer&#8221;, then save the file and close vim.</p>
+<blockquote>
+<div>local   all             pgdbadmin                               password</div></blockquote>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ service postgresql-9.3 reload
+</pre></div>
+</div>
+<p>Once you have a PGSQL server installed and running, you need to configure it for Kamaiti. You need to decide three things: database name, username, and password. I highly recommend that you use the default database and user name but choose your own secure password. These three pieces of information will also be required to later configure Django.</p>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ su postgres
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>bash-4.2$ createdb --owner pgdbadmin --template template1 --encoding UTF8 --lc-collate &#39;en_US.UTF-8&#39; --lc-ctype &#39;en_US.UTF-8&#39; kamaitidb
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>bash-4.2$ createuser --pwprompt kamaitidbadmin
+</pre></div>
+</div>
+<p>Provide a password and answer &#8216;no&#8217; to the first two questions (&#8220;Shall the new role be a superuser?&#8221; and &#8220;Shall the new role be allowed to create databases?&#8221;) and answer &#8216;yes&#8217; to the final question (&#8220;Shall the new role be allowed to create more new roles?&#8221;).</p>
+<p>Remember that this user/password will be required/used in Django&#8217;s settings file.</p>
+<div class="highlight-text"><div class="highlight"><pre>bash-4.2$ psql kamaitidb -W pgdbadmin
+</pre></div>
+</div>
+<p>Provide the password to login.</p>
+<div class="highlight-text"><div class="highlight"><pre>kamaitidb=# grant all on database kamaitidb to kamaitidbadmin
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kamaitidb=# \q
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>bash-4.2$ exit
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ vim /var/lib/pgsql/9.3/data/pg_hba.conf
+</pre></div>
+</div>
+<p>Add the following line just below &#8220;local all pgdbadmin password&#8221;, then save the file and close vim.</p>
+<blockquote>
+<div>local   kamaitidb       kamaitidbadmin                          password</div></blockquote>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ service postgresql-9.3 reload
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>root@server:~$ exit
+</pre></div>
+</div>
+<p>Verify the setup was successful</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ psql kamaitidb -W kamaitidbadmin
+</pre></div>
+</div>
+<div class="highlight-text"><div class="highlight"><pre>kamaitidb=# \q
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-kamaiti">
+<h2>Download Kamaiti<a class="headerlink" href="#download-kamaiti" title="Permalink to this headline">¶</a></h2>
+<p>You&#8217;ll download the code for Kamaiti from GitHub to your home directory.</p>
+<div class="highlight-text"><div class="highlight"><pre>kmtuser@server:~$ git clone git://github.com/hamzasheikh/kamaiti.git ~/kamaiti
+</pre></div>
+</div>
+<p>That&#8217;s really all you need to do to get the code and start hacking on it.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Install Kamaiti Development Environment</a><ul>
+<li><a class="reference internal" href="#install-local-python">Install Local Python</a><ul>
+<li><a class="reference internal" href="#install-development-tools">Install Development Tools</a></li>
+<li><a class="reference internal" href="#download-python-source-code">Download Python Source Code</a></li>
+<li><a class="reference internal" href="#compile-and-install-python">Compile and Install Python</a></li>
+<li><a class="reference internal" href="#modify-path">Modify $PATH</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#create-virtual-environment">Create Virtual Environment</a></li>
+<li><a class="reference internal" href="#install-git">Install git</a></li>
+<li><a class="reference internal" href="#install-postgresql">Install PostgreSQL</a></li>
+<li><a class="reference internal" href="#configure-postgresql">Configure PostgreSQL</a></li>
+<li><a class="reference internal" href="#download-kamaiti">Download Kamaiti</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">Discover Kamaiti</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/devinstall.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="intro.html" title="Discover Kamaiti"
+             >previous</a> |</li>
+        <li><a href="index.html">Kamaiti 1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2013, Hamza Sheikh.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.
+    </div>
+  </body>
+</html>
